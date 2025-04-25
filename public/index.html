@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Keuangan Rumah Sakit</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, rgba(240, 255, 255, 0.8), rgba(200, 250, 250, 0.8));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-container {
+            max-width: 900px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 150, 136, 0.2);
+            padding: 2rem;
+            margin: 2rem;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo {
+            font-size: 4rem;
+            color: #009688;
+        }
+        .title {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .subtitle {
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        .feature-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            text-align: center;
+            height: 100%;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            margin-bottom: 15px;
+            color: #009688;
+        }
+        .btn-primary {
+            background-color: #009688;
+            border-color: #009688;
+        }
+        .btn-primary:hover {
+            background-color: #00796b;
+            border-color: #00796b;
+        }
+        /* Health animation */
+        .health-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .heartbeat-line {
+            position: absolute;
+            top: 40%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,150,136,0.3) 20%, rgba(0,150,136,1) 50%, rgba(0,150,136,0.3) 80%, rgba(255,255,255,0) 100%);
+            animation: heartbeat 4s infinite linear;
+            box-shadow: 0 0 10px rgba(0, 150, 136, 0.6);
+        }
+        @keyframes heartbeat {
+            0% { opacity: 0.2; transform: scaleY(1); }
+            20% { opacity: 0.4; transform: scaleY(1); }
+            25% { opacity: 0.8; transform: scaleY(3); }
+            30% { opacity: 0.6; transform: scaleY(1); }
+            35% { opacity: 0.8; transform: scaleY(2); }
+            40% { opacity: 0.4; transform: scaleY(1); }
+            100% { opacity: 0.2; transform: scaleY(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Health Animation Background -->
+    <div class="health-animation">
+        <div class="heartbeat-line"></div>
+    </div>
+
+    <div class="main-container">
+        <div class="logo-container">
+            <div class="logo">
+                <i class="fas fa-hospital"></i>
+            </div>
+            <h1 class="title">Sistem Manajemen Keuangan Rumah Sakit</h1>
+            <p class="subtitle">Solusi komprehensif untuk pengelolaan keuangan rumah sakit</p>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt fa-3x"></i>
+                    </div>
+                    <h4>Dashboard Utama</h4>
+                    <p>Ikhtisar komprehensif kinerja keuangan rumah sakit</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave fa-3x"></i>
+                    </div>
+                    <h4>Manajemen Keuangan</h4>
+                    <p>Kelola tagihan, pembayaran, dan arus kas secara efisien</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book fa-3x"></i>
+                    </div>
+                    <h4>Sistem Akuntansi</h4>
+                    <p>Kelola laporan keuangan dan laporan laba rugi</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/api" class="btn btn-primary btn-lg">Masuk ke Sistem</a>
+            <p class="mt-3">Aplikasi akan segera dialihkan ke sistem utama...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Redirect to the API after 3 seconds
+        setTimeout(() => {
+            window.location.href = '/api';
+        }, 3000);
+    </script>
+</body>
+</html> 

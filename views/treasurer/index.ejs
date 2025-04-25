@@ -1,0 +1,158 @@
+<div class="dashboard-container">
+    <!-- Financial Summary Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Keuangan</span>
+                    <span class="text-muted small">Terakhir diperbarui: <%= new Date().toLocaleString() %></span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Kas di Tangan</div>
+                                <div class="card-value">Rp <%= data.financialSummary.cashOnHand.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card revenue">
+                                <div class="card-title">Piutang</div>
+                                <div class="card-value">Rp <%= data.financialSummary.accountsReceivable.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card expense">
+                                <div class="card-title">Hutang</div>
+                                <div class="card-value">Rp <%= data.financialSummary.accountsPayable.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card profit">
+                                <div class="card-title">Total Pendapatan</div>
+                                <div class="card-value">Rp <%= data.financialSummary.totalRevenue.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Cash Flow Summary -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Arus Kas</span>
+                    <a href="/treasurer/cash-flow" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Bulan Lalu</div>
+                                <div class="card-value">Rp <%= data.cashFlowSummary.lastMonth.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Bulan Ini</div>
+                                <div class="card-value">Rp <%= data.cashFlowSummary.currentMonth.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Proyeksi</div>
+                                <div class="card-value">Rp <%= data.cashFlowSummary.projection.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Tren</div>
+                                <div class="card-value"><%= data.cashFlowSummary.trend %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pending Bills and Recent Transactions -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Tagihan Tertunda</span>
+                    <a href="/treasurer/bills" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Vendor</th>
+                                    <th>Deskripsi</th>
+                                    <th>Jumlah</th>
+                                    <th>Tanggal Jatuh Tempo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.pendingBills.forEach(bill => { %>
+                                    <tr>
+                                        <td><%= bill.vendor %></td>
+                                        <td><%= bill.description %></td>
+                                        <td>Rp <%= bill.amount.toLocaleString() %></td>
+                                        <td><%= bill.dueDate %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Transaksi Pasien Terbaru</span>
+                    <a href="/treasurer/payments" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>Pasien</th>
+                                    <th>Deskripsi</th>
+                                    <th>Jumlah</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.recentTransactions.forEach(transaction => { %>
+                                    <tr>
+                                        <td><%= transaction.patientName %></td>
+                                        <td><%= transaction.description %></td>
+                                        <td>Rp <%= transaction.amount.toLocaleString() %></td>
+                                        <td>
+                                            <% if (transaction.status === 'Paid') { %>
+                                                <span class="badge badge-success">Dibayar</span>
+                                            <% } else if (transaction.status === 'Pending') { %>
+                                                <span class="badge badge-warning">Tertunda</span>
+                                            <% } else { %>
+                                                <span class="badge badge-info">Dibayar Sebagian</span>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

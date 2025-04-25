@@ -1,0 +1,706 @@
+<div class="dashboard-container">
+    <!-- Background Animation -->
+    <div class="health-bg-animation">
+        <div class="animated-gradient"></div>
+        <div class="heartbeat-line"></div>
+        <div class="medical-icon medical-icon-1"><i class="fas fa-heartbeat"></i></div>
+        <div class="medical-icon medical-icon-2"><i class="fas fa-syringe"></i></div>
+        <div class="medical-icon medical-icon-3"><i class="fas fa-stethoscope"></i></div>
+        <div class="medical-icon medical-icon-4"><i class="fas fa-pills"></i></div>
+        <div class="medical-icon medical-icon-5"><i class="fas fa-hospital"></i></div>
+        <div class="medical-icon medical-icon-6"><i class="fas fa-user-md"></i></div>
+        <div class="medical-icon medical-icon-7"><i class="fas fa-ambulance"></i></div>
+        <div class="medical-icon medical-icon-8"><i class="fas fa-first-aid"></i></div>
+        <div class="pulse-circle pulse-circle-1"></div>
+        <div class="pulse-circle pulse-circle-2"></div>
+        <div class="pulse-circle pulse-circle-3"></div>
+        <!-- Tambahan gelembung kesehatan -->
+        <div class="health-bubble bubble-1"></div>
+        <div class="health-bubble bubble-2"></div>
+        <div class="health-bubble bubble-3"></div>
+        <div class="health-bubble bubble-4"></div>
+        <!-- Particle Effect -->
+        <div id="particles-js"></div>
+        <!-- DNA Helix Animation -->
+        <div class="dna-container">
+            <div class="dna-helix">
+                <div class="dna-rung dna-rung-1"></div>
+                <div class="dna-rung dna-rung-2"></div>
+                <div class="dna-rung dna-rung-3"></div>
+                <div class="dna-rung dna-rung-4"></div>
+                <div class="dna-rung dna-rung-5"></div>
+                <div class="dna-rung dna-rung-6"></div>
+                <div class="dna-rung dna-rung-7"></div>
+                <div class="dna-rung dna-rung-8"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Financial Summary Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Keuangan</span>
+                    <span class="text-muted small">Terakhir diperbarui: <%= new Date().toLocaleString() %></span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="summary-card revenue">
+                                <div class="card-title">Total Pendapatan</div>
+                                <div class="card-value">Rp <%= data.financialSummary.totalRevenue.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card expense">
+                                <div class="card-title">Total Pengeluaran</div>
+                                <div class="card-value">Rp <%= data.financialSummary.totalExpenses.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card profit">
+                                <div class="card-title">Laba Bersih</div>
+                                <div class="card-value">Rp <%= data.financialSummary.netProfit.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card pending">
+                                <div class="card-title">Pembayaran Tertunda</div>
+                                <div class="card-value">Rp <%= data.financialSummary.pendingPayments.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <canvas id="financialSummaryChart" 
+                                data-revenue="<%= data.financialSummary.totalRevenue %>" 
+                                data-expenses="<%= data.financialSummary.totalExpenses %>" 
+                                data-profit="<%= data.financialSummary.netProfit %>">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Department Summaries -->
+    <div class="row mb-4">
+        <!-- Accounting Highlights -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Akuntansi</span>
+                    <a href="/accounting" class="btn btn-sm btn-outline-primary">Lihat Departemen</a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Total Aset</div>
+                                <div class="card-value">Rp <%= data.accountingHighlights.assetsTotal.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Total Kewajiban</div>
+                                <div class="card-value">Rp <%= data.accountingHighlights.liabilitiesTotal.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Total Ekuitas</div>
+                                <div class="card-value">Rp <%= data.accountingHighlights.equityTotal.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Rasio Lancar</div>
+                                <div class="card-value"><%= data.accountingHighlights.currentRatio.toFixed(2) %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Treasury Highlights -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Bendahara</span>
+                    <a href="/treasurer" class="btn btn-sm btn-outline-primary">Lihat Departemen</a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Kas di Tangan</div>
+                                <div class="card-value">Rp <%= data.treasuryHighlights.cashOnHand.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Piutang</div>
+                                <div class="card-value">Rp <%= data.treasuryHighlights.accountsReceivable.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Hutang</div>
+                                <div class="card-value">Rp <%= data.treasuryHighlights.accountsPayable.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Status Arus Kas</div>
+                                <div class="card-value"><%= data.treasuryHighlights.cashFlowStatus %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Transactions -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    Transaksi Terbaru
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tanggal</th>
+                                    <th>Deskripsi</th>
+                                    <th>Jumlah</th>
+                                    <th>Tipe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.recentTransactions.forEach(transaction => { %>
+                                    <tr>
+                                        <td><%= transaction.id %></td>
+                                        <td><%= transaction.date %></td>
+                                        <td><%= transaction.description %></td>
+                                        <td>Rp <%= transaction.amount.toLocaleString() %></td>
+                                        <td>
+                                            <% if (transaction.type === 'income') { %>
+                                                <span class="badge badge-success">Pendapatan</span>
+                                            <% } else { %>
+                                                <span class="badge badge-danger">Pengeluaran</span>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Animasi Latar Belakang yang Ditingkatkan */
+    .health-bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        opacity: 0.30; /* Opasitas ditingkatkan */
+        pointer-events: none;
+        background: linear-gradient(to bottom right, rgba(240, 255, 255, 0.3), rgba(200, 250, 250, 0.3));
+    }
+    
+    /* Animated Gradient Background */
+    .animated-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, 
+            rgba(0, 150, 136, 0.05) 0%, 
+            rgba(140, 220, 220, 0.1) 25%, 
+            rgba(50, 180, 200, 0.1) 50%, 
+            rgba(0, 150, 136, 0.05) 75%);
+        background-size: 400% 400%;
+        animation: gradient-shift 15s ease infinite;
+        transform: translateX(-25%) translateY(-25%);
+    }
+    
+    @keyframes gradient-shift {
+        0% {
+            background-position: 0% 50%;
+            transform: translateX(-25%) translateY(-25%) rotate(0deg);
+        }
+        50% {
+            background-position: 100% 50%;
+            transform: translateX(-25%) translateY(-25%) rotate(3deg);
+        }
+        100% {
+            background-position: 0% 50%;
+            transform: translateX(-25%) translateY(-25%) rotate(0deg);
+        }
+    }
+    
+    /* Heartbeat line dengan efek yang ditingkatkan */
+    .heartbeat-line {
+        position: absolute;
+        top: 40%;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,150,136,0.4) 20%, rgba(0,150,136,1) 50%, rgba(0,150,136,0.4) 80%, rgba(255,255,255,0) 100%);
+        animation: heartbeat 4s infinite linear, move-line 15s infinite ease-in-out;
+        box-shadow: 0 0 12px rgba(0, 150, 136, 0.8);
+    }
+    
+    @keyframes move-line {
+        0% {
+            top: 40%;
+        }
+        50% {
+            top: 45%;
+        }
+        100% {
+            top: 40%;
+        }
+    }
+    
+    @keyframes heartbeat {
+        0% {
+            opacity: 0.2;
+            transform: scaleY(1);
+        }
+        20% {
+            opacity: 0.5;
+            transform: scaleY(1);
+        }
+        25% {
+            opacity: 0.9;
+            transform: scaleY(3.5);
+        }
+        30% {
+            opacity: 0.7;
+            transform: scaleY(1);
+        }
+        35% {
+            opacity: 0.9;
+            transform: scaleY(2.5);
+        }
+        40% {
+            opacity: 0.5;
+            transform: scaleY(1);
+        }
+        100% {
+            opacity: 0.2;
+            transform: scaleY(1);
+        }
+    }
+    
+    /* Ikon Medis dengan efek yang ditingkatkan */
+    .medical-icon {
+        position: absolute;
+        color: rgba(0, 150, 136, 0.5);
+        font-size: 2.5rem;
+        animation: float 15s infinite linear, pulse-opacity 5s infinite ease-in-out;
+        text-shadow: 0 0 10px rgba(0, 150, 136, 0.3);
+    }
+    
+    @keyframes pulse-opacity {
+        0% {
+            opacity: 0.4;
+            text-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+        }
+        50% {
+            opacity: 0.7;
+            text-shadow: 0 0 15px rgba(0, 150, 136, 0.5);
+        }
+        100% {
+            opacity: 0.4;
+            text-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+        }
+    }
+    
+    /* DNA Helix Animation */
+    .dna-container {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        height: 60%;
+        width: 100px;
+        opacity: 0.4;
+        animation: dna-rotate 20s infinite linear;
+    }
+    
+    .dna-helix {
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .dna-rung {
+        position: absolute;
+        width: 70px;
+        height: 10px;
+        border-radius: 5px;
+        background: rgba(0, 150, 136, 0.4);
+        transform-origin: left center;
+        animation: dna-rung-rotate 8s infinite linear;
+    }
+    
+    .dna-rung-1 { top: 10%; animation-delay: 0s; }
+    .dna-rung-2 { top: 20%; animation-delay: -1s; }
+    .dna-rung-3 { top: 30%; animation-delay: -2s; }
+    .dna-rung-4 { top: 40%; animation-delay: -3s; }
+    .dna-rung-5 { top: 50%; animation-delay: -4s; }
+    .dna-rung-6 { top: 60%; animation-delay: -5s; }
+    .dna-rung-7 { top: 70%; animation-delay: -6s; }
+    .dna-rung-8 { top: 80%; animation-delay: -7s; }
+    
+    @keyframes dna-rotate {
+        0% {
+            transform: perspective(500px) rotateY(0deg);
+        }
+        100% {
+            transform: perspective(500px) rotateY(360deg);
+        }
+    }
+    
+    @keyframes dna-rung-rotate {
+        0% {
+            transform: rotate(0deg);
+            width: 70px;
+        }
+        25% {
+            transform: rotate(90deg);
+            width: 20px;
+        }
+        50% {
+            transform: rotate(180deg);
+            width: 70px;
+        }
+        75% {
+            transform: rotate(270deg);
+            width: 20px;
+        }
+        100% {
+            transform: rotate(360deg);
+            width: 70px;
+        }
+    }
+    
+    /* Posisi dan ukuran yang disesuaikan untuk ikon */
+    .medical-icon-1 {
+        top: 15%;
+        left: 10%;
+        animation-delay: 0s;
+        font-size: 3rem;
+    }
+    
+    .medical-icon-2 {
+        top: 75%;
+        left: 15%;
+        animation-delay: -3s;
+        font-size: 2.8rem;
+    }
+    
+    .medical-icon-3 {
+        top: 25%;
+        right: 20%;
+        animation-delay: -6s;
+        font-size: 3.5rem;
+    }
+    
+    .medical-icon-4 {
+        top: 60%;
+        right: 15%;
+        animation-delay: -9s;
+        font-size: 2.7rem;
+    }
+    
+    .medical-icon-5 {
+        top: 40%;
+        left: 30%;
+        animation-delay: -12s;
+        font-size: 4rem;
+    }
+    
+    .medical-icon-6 {
+        top: 10%;
+        right: 35%;
+        animation-delay: -7s;
+        font-size: 3.2rem;
+    }
+    
+    .medical-icon-7 {
+        top: 45%;
+        right: 45%;
+        animation-delay: -8s;
+        font-size: 3.8rem;
+    }
+    
+    .medical-icon-8 {
+        top: 80%;
+        right: 40%;
+        animation-delay: -5s;
+        font-size: 3.5rem;
+    }
+    
+    /* Animasi float dengan efek ditingkatkan */
+    @keyframes float {
+        0% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+            opacity: 0.3;
+        }
+        25% {
+            transform: translate(15px, 20px) rotate(5deg) scale(1.1);
+            opacity: 0.5;
+        }
+        50% {
+            transform: translate(20px, 0) rotate(0deg) scale(1);
+            opacity: 0.3;
+        }
+        75% {
+            transform: translate(10px, -20px) rotate(-5deg) scale(1.1);
+            opacity: 0.5;
+        }
+        100% {
+            transform: translate(0, 0) rotate(0deg) scale(1);
+            opacity: 0.3;
+        }
+    }
+    
+    /* Lingkaran Pulsa dengan efek yang ditingkatkan */
+    .pulse-circle {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(0, 150, 136, 0.15);
+        animation: pulse 8s infinite ease-out;
+        border: 2px solid rgba(0, 150, 136, 0.2);
+        box-shadow: 0 0 10px rgba(0, 150, 136, 0.2);
+    }
+    
+    .pulse-circle-1 {
+        top: 30%;
+        left: 20%;
+        width: 180px;
+        height: 180px;
+        animation-delay: 0s;
+    }
+    
+    .pulse-circle-2 {
+        top: 60%;
+        right: 25%;
+        width: 250px;
+        height: 250px;
+        animation-delay: -3s;
+    }
+    
+    .pulse-circle-3 {
+        top: 15%;
+        right: 15%;
+        width: 150px;
+        height: 150px;
+        animation-delay: -6s;
+    }
+    
+    /* Animasi gelembung dengan efek yang ditingkatkan */
+    .health-bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(0, 150, 136, 0.1));
+        border: 1px solid rgba(0, 150, 136, 0.2);
+        animation: bubble 20s infinite ease-in-out;
+        z-index: -1;
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5), 0 0 5px rgba(0, 150, 136, 0.2);
+    }
+    
+    .bubble-1 {
+        width: 50px;
+        height: 50px;
+        bottom: 20%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+    
+    .bubble-2 {
+        width: 30px;
+        height: 30px;
+        bottom: 40%;
+        left: 40%;
+        animation-delay: -5s;
+    }
+    
+    .bubble-3 {
+        width: 40px;
+        height: 40px;
+        bottom: 30%;
+        right: 20%;
+        animation-delay: -10s;
+    }
+    
+    .bubble-4 {
+        width: 25px;
+        height: 25px;
+        bottom: 70%;
+        right: 30%;
+        animation-delay: -15s;
+    }
+    
+    @keyframes bubble {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.1;
+        }
+        25% {
+            transform: translate(-10px, -40px) scale(1.2);
+            opacity: 0.3;
+        }
+        50% {
+            transform: translate(10px, -80px) scale(0.9);
+            opacity: 0.1;
+        }
+        75% {
+            transform: translate(-5px, -120px) scale(1.1);
+            opacity: 0.3;
+        }
+        100% {
+            transform: translate(0, -160px) scale(1);
+            opacity: 0;
+        }
+    }
+    
+    /* Memperjelas konten dashboard */
+    .dashboard-card {
+        position: relative;
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 150, 136, 0.1);
+        backdrop-filter: blur(5px); /* Efek blur untuk kartu */
+    }
+    
+    .dashboard-card:hover {
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 150, 136, 0.2);
+        transform: translateY(-3px);
+    }
+    
+    /* Particle efek */
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+</style>
+
+<!-- Tambahkan particlesJS library di bawah file ini -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Buat elemen particles-js dinamis jika belum ada
+    if (!document.getElementById('particles-js-script')) {
+        var particlesScript = document.createElement('script');
+        particlesScript.id = 'particles-js-script';
+        particlesScript.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+        document.body.appendChild(particlesScript);
+        
+        particlesScript.onload = function() {
+            // Inisialisasi particlesJS
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 20,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#009688"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.3,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 5,
+                            "random": true,
+                            "anim": {
+                                "enable": true,
+                                "speed": 4,
+                                "size_min": 1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#009688",
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "bounce",
+                            "bounce": false
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": false
+                            },
+                            "onclick": {
+                                "enable": false
+                            },
+                            "resize": true
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+        };
+    }
+});
+</script> 

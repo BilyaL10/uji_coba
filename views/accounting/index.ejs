@@ -1,0 +1,180 @@
+<div class="dashboard-container">
+    <!-- Financial Summary Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Keuangan</span>
+                    <span class="text-muted small">Terakhir diperbarui: <%= new Date().toLocaleString() %></span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Total Aset</div>
+                                <div class="card-value">Rp <%= data.financialSummary.assets.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Total Kewajiban</div>
+                                <div class="card-value">Rp <%= data.financialSummary.liabilities.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card">
+                                <div class="card-title">Total Ekuitas</div>
+                                <div class="card-value">Rp <%= data.financialSummary.equity.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card profit">
+                                <div class="card-title">Laba Bersih</div>
+                                <div class="card-value">Rp <%= (data.financialSummary.revenue - data.financialSummary.expenses).toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Balance Sheet & Income Statement Summary -->
+    <div class="row mb-4">
+        <!-- Balance Sheet -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Neraca</span>
+                    <a href="/accounting/statements" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Aset Lancar</div>
+                                <div class="card-value">Rp <%= data.balanceSheetSummary.currentAssets.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Aset Tetap</div>
+                                <div class="card-value">Rp <%= data.balanceSheetSummary.fixedAssets.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Kewajiban Lancar</div>
+                                <div class="card-value">Rp <%= data.balanceSheetSummary.currentLiabilities.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Kewajiban Jangka Panjang</div>
+                                <div class="card-value">Rp <%= data.balanceSheetSummary.longTermLiabilities.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="summary-card">
+                                <div class="card-title">Total Ekuitas</div>
+                                <div class="card-value">Rp <%= data.balanceSheetSummary.equity.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Income Statement -->
+        <div class="col-md-6">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Ringkasan Laporan Laba Rugi</span>
+                    <a href="/accounting/statements" class="btn btn-sm btn-outline-primary">Lihat Detail</a>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="summary-card revenue">
+                                <div class="card-title">Pendapatan</div>
+                                <div class="card-value">Rp <%= data.incomeStatementSummary.revenue.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card expense">
+                                <div class="card-title">Biaya Layanan</div>
+                                <div class="card-value">Rp <%= data.incomeStatementSummary.costOfServices.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Laba Kotor</div>
+                                <div class="card-value">Rp <%= data.incomeStatementSummary.grossProfit.toLocaleString() %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="summary-card">
+                                <div class="card-title">Biaya Operasional</div>
+                                <div class="card-value">Rp <%= data.incomeStatementSummary.operatingExpenses.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="summary-card profit">
+                                <div class="card-title">Laba Bersih</div>
+                                <div class="card-value">Rp <%= data.incomeStatementSummary.netProfit.toLocaleString() %></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Journal Entries -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>Entri Jurnal Terbaru</span>
+                    <a href="/accounting/journal" class="btn btn-sm btn-outline-primary">Lihat Semua</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tanggal</th>
+                                    <th>Deskripsi</th>
+                                    <th>Debit</th>
+                                    <th>Kredit</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% data.recentJournalEntries.forEach(entry => { %>
+                                    <tr>
+                                        <td><%= entry.id %></td>
+                                        <td><%= entry.date %></td>
+                                        <td><%= entry.description %></td>
+                                        <td><%= entry.debit %></td>
+                                        <td><%= entry.credit %></td>
+                                        <td>Rp <%= entry.amount.toLocaleString() %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

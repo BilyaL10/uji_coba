@@ -1,0 +1,182 @@
+<div class="home-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    Selamat Datang di Sistem Manajemen Keuangan Rumah Sakit
+                </div>
+                <div class="card-body">
+                    <p class="lead">
+                        Sistem ini dirancang untuk membantu rumah sakit mengelola keuangan mereka secara efektif dan efisien.
+                        Menyediakan alat komprehensif untuk akuntansi, manajemen bendahara, dan pengawasan eksekutif.
+                    </p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tachometer-alt fa-3x text-primary"></i>
+                                </div>
+                                <h4>Dashboard Utama</h4>
+                                <p>
+                                    Ikhtisar komprehensif kinerja keuangan rumah sakit.
+                                    Menampilkan metrik utama dari departemen akuntansi dan bendahara.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-money-bill-wave fa-3x text-success"></i>
+                                </div>
+                                <h4>Manajemen Keuangan</h4>
+                                <p>
+                                    Kelola tagihan, pembayaran, dan arus kas secara efisien.
+                                    Lacak pembayaran pasien dan tangani transaksi keuangan.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-book fa-3x text-info"></i>
+                                </div>
+                                <h4>Sistem Akuntansi</h4>
+                                <p>
+                                    Kelola laporan keuangan, neraca, dan laporan laba rugi.
+                                    Lacak aset, kewajiban, dan pelihara buku besar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <% if (!user) { %>
+                        <div class="text-center mt-5">
+                            <p>Silakan login untuk mengakses sistem.</p>
+                            <a href="/auth/login" class="btn btn-primary">Login</a>
+                            <a href="/auth/register" class="btn btn-outline-secondary ms-2">Daftar</a>
+                        </div>
+                    <% } else { %>
+                        <div class="text-center mt-5">
+                            <% if (user.role === 'admin') { %>
+                                <a href="/dashboard" class="btn btn-primary">Ke Dashboard Utama</a>
+                            <% } else if (user.role === 'treasurer') { %>
+                                <a href="/treasurer" class="btn btn-primary">Ke Dashboard Bendahara</a>
+                            <% } else if (user.role === 'accountant') { %>
+                                <a href="/accounting" class="btn btn-primary">Ke Dashboard Akuntansi</a>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    Ikhtisar Sistem
+                </div>
+                <div class="card-body">
+                    <h5>Fitur Utama</h5>
+                    <ul class="feature-list">
+                        <li>
+                            <i class="fas fa-check-circle text-success"></i>
+                            <strong>Kontrol Akses Berbasis Peran:</strong> Dashboard berbeda untuk peran berbeda (Admin, Bendahara, Akuntan)
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle text-success"></i>
+                            <strong>Pelaporan Keuangan:</strong> Menghasilkan laporan keuangan komprehensif untuk pengambilan keputusan yang lebih baik
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle text-success"></i>
+                            <strong>Manajemen Arus Kas:</strong> Memantau dan mengelola arus kas rumah sakit secara efektif
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle text-success"></i>
+                            <strong>Pelacakan Tagihan dan Pembayaran:</strong> Melacak semua tagihan dan pembayaran
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle text-success"></i>
+                            <strong>Alat Akuntansi:</strong> Memelihara buku besar, entri jurnal, dan laporan keuangan
+                        </li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <h5>Peran Sistem</h5>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Peran</th>
+                                        <th>Level Akses</th>
+                                        <th>Tanggung Jawab</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Admin</td>
+                                        <td>Akses Sistem Penuh</td>
+                                        <td>Manajemen keuangan keseluruhan, manajemen pengguna, dan pengawasan sistem</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bendahara</td>
+                                        <td>Dashboard Bendahara</td>
+                                        <td>Mengelola tagihan, pembayaran, dan arus kas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Akuntan</td>
+                                        <td>Dashboard Akuntansi</td>
+                                        <td>Mengelola laporan keuangan, buku besar, dan laporan</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .feature-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        text-align: center;
+        height: 100%;
+        transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+        margin-bottom: 15px;
+    }
+    
+    .feature-list {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .feature-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .feature-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .feature-list i {
+        margin-right: 10px;
+    }
+</style> 
