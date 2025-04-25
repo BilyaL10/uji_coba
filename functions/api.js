@@ -44,6 +44,11 @@ app.use((req, res, next) => {
     next();
 });
 
+// Root route to check if the function is working
+app.get('/', (req, res) => {
+    res.json({ status: 'API is running' });
+});
+
 // Routes
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
@@ -51,10 +56,28 @@ app.use('/treasurer', treasurerRoutes);
 app.use('/accounting', accountingRoutes);
 
 // Index route
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
     // Generate mock data for demonstration
     const data = {};
     res.render('index', { title: 'Beranda', data });
+});
+
+// Catch 404 and forward to error handler
+app.use((req, res, next) => {
+    res.status(404).json({
+        error: 'Not Found',
+        path: req.path,
+        method: req.method
+    });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({
+        error: 'Server Error',
+        message: err.message
+    });
 });
 
 // Export the Express app wrapped with serverless
