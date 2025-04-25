@@ -46,7 +46,22 @@ app.use((req, res, next) => {
 
 // Root route to check if the function is working
 app.get('/', (req, res) => {
-    res.json({ status: 'API is running' });
+    res.json({ status: 'API is running', message: 'Welcome to Hospital Finance API' });
+});
+
+// Specific route for /api endpoint
+app.get('/api', (req, res) => {
+    res.json({ 
+        status: 'success',
+        message: 'Hospital Finance Management API',
+        timestamp: new Date(),
+        endpoints: [
+            "/auth/login - Authentication",
+            "/dashboard - Main Dashboard",
+            "/treasurer - Treasury Management",
+            "/accounting - Accounting System"
+        ]
+    });
 });
 
 // Routes
