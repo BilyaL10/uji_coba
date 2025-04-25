@@ -7,6 +7,7 @@
   directory = "functions"
   node_bundler = "esbuild"
 
+# Redirect khusus untuk endpoint API
 [[redirects]]
   from = "/api"
   to = "/.netlify/functions/api/api"
@@ -19,6 +20,14 @@
   status = 200
   force = true
 
+# Redirect ke halaman utama Netlify untuk UI aplikasi
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+  force = true
+
+# Redirect untuk route lainnya
 [[redirects]]
   from = "/*"
   to = "/index.html"
