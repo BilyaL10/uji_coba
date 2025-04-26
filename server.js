@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const expressLayouts = require('express-ejs-layouts');
 
 // Initialize Express app
 const app = express();
@@ -18,14 +19,14 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up express-ejs-layouts
-require('./config/express-layouts')(app);
+app.use(expressLayouts);
+app.set('layout', 'layouts/main');
 
 // Session configuration
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'hospital-finance-secret-key',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // set to true in production with HTTPS
+    secret: 'hospital-finance-secret',
+    resave: true,
+    saveUninitialized: true
 }));
 
 // Flash messages
@@ -53,7 +54,24 @@ app.use('/treasurer', treasurerRoutes);
 
 // Home route
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Hospital Finance Management System' });
+    // Generate mock data for demonstration
+    const data = {};
+    res.render('index', { title: 'Beranda', data });
+});
+
+// API status endpoint
+app.get('/api', (req, res) => {
+    res.json({ 
+        status: 'success',
+        message: 'Hospital Finance Management API',
+        timestamp: new Date(),
+        endpoints: [
+            "/auth/login - Authentication",
+            "/dashboard - Main Dashboard",
+            "/treasurer - Treasury Management",
+            "/accounting - Accounting System"
+        ]
+    });
 });
 
 // Error handling middleware
@@ -61,7 +79,7 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).render('error', { 
         title: 'Error',
-        message: 'Something went wrong!',
+        message: 'Terjadi kesalahan pada server',
         error: process.env.NODE_ENV === 'development' ? err : {}
     });
 });

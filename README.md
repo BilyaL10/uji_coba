@@ -128,3 +128,48 @@ hospital-finance-management/
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 
+
+## Deployment
+
+### Opsi 1: Cyclic.sh (Gratis)
+
+1. Buat akun di [Cyclic.sh](https://www.cyclic.sh/)
+2. Hubungkan dengan repositori GitHub Anda
+3. Ikuti petunjuk untuk deploy
+4. Tidak perlu konfigurasi tambahan, Cyclic akan otomatis mendeteksi aplikasi Node.js
+5. Aplikasi Anda akan di-deploy dan dapat diakses melalui URL yang disediakan
+
+### Opsi 2: Railway (Free Tier)
+
+1. Buat akun di [Railway](https://railway.app/)
+2. Connect dengan GitHub repository
+3. Railway akan otomatis mendeteksi aplikasi Node.js
+
+### Opsi 3: Render.com
+
+1. Buat akun di [Render](https://render.com/)
+2. Deploy dari GitHub repository menggunakan file render.yaml
+
+## Cara Penggunaan Lokal
+
+1. Clone repository
+```
+git clone https://github.com/username/hospital-finance-management.git
+```
+
+2. Install dependencies
+```
+npm install
+```
+
+3. Jalankan aplikasi
+```
+npm run dev
+```
+
+4. Buka browser di http://localhost:8080
+
+## Akun Demo
+
+- Email: admin@hospital.com
+- Password: admin123 
